@@ -43,3 +43,14 @@ cumplePista(Persona, pista(Color, Caracteristica)) :-
 cumpleTodasPistas(Persona, Color) :-
     pista(Color, _),
     forall(pista(Color, Caracteristica), cumplePista(Persona, pista(Color, Caracteristica))).
+
+%punto5
+contarPersonasCumplenPistas(Color, Cantidad) :-
+    findall(Persona, cumpleTodasPistas(Persona, Color), Personas),
+    length(Personas, Cantidad).
+
+vaGanando(Color) :-
+    contrincante(Color, Contrincante),
+    contarPersonasCumplenPistas(Color, Cantidad1),
+    contarPersonasCumplenPistas(Contrincante, Cantidad2),
+    Cantidad1 < Cantidad2.
