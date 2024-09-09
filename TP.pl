@@ -29,9 +29,17 @@ esRubio(Persona) :- persona(Persona, pelo(rubio,_)).
 tieneLentes(Persona) :- persona(Persona, lentes(_)).
 
 %punto3
-esRubioYBocaChica(Persona) :- esRubio(Persona), persona(Persona, boca(chica)).
+esRubioYBocaChica(Persona) :- 
+    esRubio(Persona),
+    persona(Persona, boca(chica)).
 
 %punto4
 pista(rojo,pelo(rubio,_)).
 pista(rojo,boca(chica)).
-coincide(Persona) :- persona(Persona, Caracteristica), pista(_, Caracteristica), not((persona(Persona, Caracteristica2), not(pista(_, Caracteristica2)))).
+cumplePista(Persona, pista(Color, Caracteristica)) :-
+    pista(Color, Caracteristica),
+    carta(Color, Persona),
+    persona(Persona, Caracteristica).
+cumpleTodasPistas(Persona, Color) :-
+    pista(Color, _),
+    forall(pista(Color, Caracteristica), cumplePista(Persona, pista(Color, Caracteristica))).
