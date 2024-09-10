@@ -37,19 +37,19 @@ esRubioYBocaChica(Persona) :-
 %estoy seguro que este punto se hace con include, pude plantear esto hasta ahora pero todaviano funciona
 pista(rojo,pelo(rubio,_)).
 pista(rojo,boca(chica)).
-incluido(A, B):-forall(member(X, A), member(X, B)).
+%incluido(A, B):-forall(member(X, A), member(X, B)).
 
-pistaEntreJugadorPersona(Color, Persona) :-pista(Color, CaracteristicasJugador),  
-   	persona(Persona, CaracteristicasPersona),      
-    incluido(CaracteristicasJugador, CaracteristicasPersona).
+%pistaEntreJugadorPersona(Color, Persona) :-pista(Color, CaracteristicasJugador),  
+    %persona(Persona, CaracteristicasPersona),      
+    %incluido(CaracteristicasJugador, CaracteristicasPersona).
 
-%cumplePista(Persona, pista(Color, Caracteristica)) :-
-   %pista(Color, Caracteristica),
-   % carta(Color, Persona),
-   % persona(Persona, Caracteristica).
-%cumpleTodasPistas(Persona, Color) :-
-   % pista(Color, _),
-    %forall(pista(Color, Caracteristica), cumplePista(Persona, pista(Color, Caracteristica))).
+cumplePista(Persona, pista(Color, Caracteristica)) :-
+    pista(Color, Caracteristica),
+    carta(Color, Persona),
+    persona(Persona, Caracteristica).
+cumpleTodasPistas(Persona, Color) :-
+    pista(Color, _),
+    forall(pista(Color, Caracteristica), cumplePista(Persona, pista(Color, Caracteristica))).
 
 %punto5
 contarPersonasCumplenPistas(Color, Cantidad) :-
