@@ -36,6 +36,7 @@ esRubioYBocaChica(Persona) :-
 %punto4
 pista(rojo,pelo(rubio,_)).
 pista(rojo,boca(chica)).
+
 cumplePista(Persona, pista(Color, Caracteristica)) :-
     pista(Color, Caracteristica),
     carta(Color, Persona),
