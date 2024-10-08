@@ -24,9 +24,9 @@ contrincante(rojo, azul).
 contrincante(azul, rojo).
 
 %punto1
-esCalvo(Persona) :- persona(Persona, calvo).
-esRubio(Persona) :- persona(Persona, pelo(rubio,_)).
-tieneLentes(Persona) :- persona(Persona, lentes(_)).
+esCalvo(Jugador) :-carta(Jugador, Persona), persona(Persona, calvo).
+esRubio(Jugador) :-carta(Jugador, Persona), persona(Persona, pelo(rubio,_)).
+tieneLentes(Jugador) :-carta(Jugador, Persona), persona(Persona, lentes(_)).
 
 %punto3
 esRubioYBocaChica(Persona) :- 
