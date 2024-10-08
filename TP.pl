@@ -29,8 +29,7 @@ esRubio(Jugador) :-carta(Jugador, Persona), persona(Persona, pelo(rubio,_)).
 tieneLentes(Jugador) :-carta(Jugador, Persona), persona(Persona, lentes(_)).
 
 %punto3
-esRubioYBocaChica(Persona) :- 
-    esRubio(Persona),
+esRubioYBocaChica(Persona) :- persona(Persona, pelo(rubio,_)),
     persona(Persona, boca(chica)).
 
 %punto4
