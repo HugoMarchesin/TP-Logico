@@ -16,7 +16,7 @@ persona(pepe, nariz(chica)).
 persona(Persona, lentes(marrones)) :- persona(Persona, nariz(chica)), persona(Persona, boca(grande)).
 persona(Persona, ojos(marrones)) :- persona(Persona, pelo(morocho)).
 persona(Persona, ojos(marrones)) :- persona(Persona, pelo(castanio)).
-persona(Persona, cara(redonda)) :- not(persona(Persona, cara(puntuda))).
+persona(Persona, cara(redonda)) :- persona(Persona,_), not(persona(Persona, cara(puntuda))).
 
 carta(rojo, samuel).
 carta(azul, pepe).
