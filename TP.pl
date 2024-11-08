@@ -12,11 +12,15 @@ persona(pepe, cara(puntuda)).
 persona(pepe, ojos(marrones)).
 persona(pepe, nariz(chica)).
 
+%Esto lo hizo la profe
+personaje(pepe).
+
+
 %punto2
 persona(Persona, lentes(marrones)) :- persona(Persona, nariz(chica)), persona(Persona, boca(grande)).
 persona(Persona, ojos(marrones)) :- persona(Persona, pelo(morocho)).
 persona(Persona, ojos(marrones)) :- persona(Persona, pelo(castanio)).
-persona(Persona, cara(redonda)) :- persona(Persona,_), not(persona(Persona, cara(puntuda))).
+persona(Persona, cara(redonda)) :- personaje(Persona), not(persona(Persona, cara(puntuda))).
 
 carta(rojo, samuel).
 carta(azul, pepe).
@@ -36,13 +40,16 @@ esRubioYBocaChica(Persona) :- persona(Persona, pelo(rubio,_)),
 pista(rojo,pelo(rubio,_)).
 pista(rojo,boca(chica)).
 
-cumplePista(Persona, pista(Color, Caracteristica)) :-
+cumplePista(Persona, pista(_, Caracteristica)) :-
     pista(Color, Caracteristica),
-    carta(Color, Persona),
+    carta(_, Persona),
     persona(Persona, Caracteristica).
+
 cumpleTodasPistas(Persona, Color) :-
     pista(Color, _),
-    forall(pista(Color, Caracteristica), cumplePista(Persona, pista(Color, Caracteristica))).
+    persona(Persona, Caracteristica).
+
+    forall(pista(Color, Caracteristica), cumplePista(Persona, pista(_, Caracteristica))).
 
 %punto5
 contarPersonasCumplenPistas(Color, Cantidad) :-

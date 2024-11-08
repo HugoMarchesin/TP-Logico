@@ -1,22 +1,25 @@
+:-include("TP").
+
 %tests
 :-begin_tests(punto1).
-    test(son_calvos, set(Persona == [samuel])):-
+    test(son_calvos, set(Persona == [rojo])):-
         esCalvo(Persona).
     test(no_son_calvos, fail) :-
-        esCalvo(pepe).
+        esCalvo(azul).
     test(no_son_rubios, fail) :-
-        esRubio(samuel).
-    test(son_rubios, set(Persona == [pepe])) :-
+        esRubio(rojo).
+    test(son_rubios, set(Persona == [azul])) :-
         esRubio(Persona).
-    test(tienen_lentes, set(Persona == [samuel, pepe])) :-
+    test(tienen_lentes, set(Persona == [rojo, azul])) :-
         tieneLentes(Persona).
 :-end_tests(punto1).
 
 :-begin_tests(punto2).
     test(tienen_lentes_marrones, set(Persona == [])) :-
         persona(Persona, lentes(marrones)).
-    test(no_tienen_lentes_marrones, fail) :-
-        persona(samuel, lentes(marrones));
+    test(samuel_no_tienen_lentes_marrones, fail) :-
+        persona(samuel, lentes(marrones)).
+    test(pepe_no_tienen_lentes_marrones, fail) :-
         persona(pepe, lentes(marrones)).
     test(tienen_ojos_marrones, set(Persona == [])) :-
         persona(Persona, lentes(marrones)).
@@ -30,15 +33,20 @@
 :-end_tests(punto3).
 
 :-begin_tests(punto4).
-    test(cumplen_alguna_pista, set(Persona == [samuel])) :-
+    test(cumplen_alguna_pista, set(Persona == [pepe, samuel])) :-
         cumplePista(Persona, _).
-    test(no_cumplen_alguna_pista, fail) :-
-        cumplePista(pepe, _).
     test(cumplen_las_pistas, set(Persona == [])) :-
         cumpleTodasPistas(Persona, _).
-    test(no_cumplen_las_pistas, fail) :-
-        cumpleTodasPistas(samuel, _);
+    test(samuel_no_cumple_las_pistas, fail) :-
+        cumpleTodasPistas(samuel, _).
+    test(pepe_no_cumple_las_pistas, fail) :-
         cumpleTodasPistas(pepe, _).
+    
+    test(alguien_cumple_pista_rubio) :-
+        cumplePista(_, pista(_, pelo(rubio,_))).
+    test(alguien_cumple_pista_boca_chica) :-
+        cumplePista(_, pista(_, boca(chica))).
+    
 :-end_tests(punto4).
 
 :-begin_tests(punto5).
