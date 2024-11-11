@@ -36,8 +36,9 @@ esRubioYBocaChica(Persona) :- persona(Persona, pelo(rubio,_)),
     persona(Persona, boca(chica)).
 
 %punto4
-pista(rojo,pelo(rubio,_)).
-pista(rojo,boca(chica)).
+pista(rojo, pelo(rubio,_)).
+pista(rojo, boca(chica)).
+pista(azul, lentes(rosas)).
 
 cumplePista(Persona, Caracteristica) :-
     carta(_, Persona),
@@ -46,12 +47,15 @@ cumplePista(Persona, Caracteristica) :-
 cumpleTodasPistas(Persona, Color) :-
     pista(Color, Caracteristica),
     cumplePista(Persona, Caracteristica),
-    not((pista(Jugador, OtraCaracteristica), not(persona(Persona, OtraCaracteristica)))).
+    not((pista(Color, OtraCaracteristica), not(persona(Persona, OtraCaracteristica)))).
 
 %punto5
-contarPersonasCumplenPistas(Color, Cantidad) :-
-    findall(Persona, cumpleTodasPistas(Persona, Color), Personas),
-    length(Personas, Cantidad).
+contarPersonasCumplenPistas(Color, CantidadPersonasCumplenPistas) :-
+    findall(Persona, cumpleTodasPistas(Persona, Color), PersonasPorPista),
+    findall(Pista, pista(Color, Pista), Pistas),
+    length(Pistas, CantidadPistas),
+    length(PersonasPorPista, CantidadPersonasPorPista),
+    CantidadPersonasCumplenPistas is CantidadPersonasPorPista / CantidadPistas.
 
 vaGanando(Color) :-
     contrincante(Color, Contrincante),
