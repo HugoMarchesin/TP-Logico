@@ -12,9 +12,8 @@ persona(pepe, cara(puntuda)).
 persona(pepe, ojos(marrones)).
 persona(pepe, nariz(chica)).
 
-%Esto lo hizo la profe
 personaje(pepe).
-
+personaje(samuel).
 
 %punto2
 persona(Persona, lentes(marrones)) :- persona(Persona, nariz(chica)), persona(Persona, boca(grande)).
@@ -40,16 +39,14 @@ esRubioYBocaChica(Persona) :- persona(Persona, pelo(rubio,_)),
 pista(rojo,pelo(rubio,_)).
 pista(rojo,boca(chica)).
 
-cumplePista(Persona, pista(_, Caracteristica)) :-
-    pista(Color, Caracteristica),
+cumplePista(Persona, Caracteristica) :-
     carta(_, Persona),
     persona(Persona, Caracteristica).
 
 cumpleTodasPistas(Persona, Color) :-
-    pista(Color, _),
-    persona(Persona, Caracteristica).
-
-    forall(pista(Color, Caracteristica), cumplePista(Persona, pista(_, Caracteristica))).
+    pista(Color, Caracteristica),
+    cumplePista(Persona, Caracteristica),
+    not((pista(Jugador, OtraCaracteristica), not(persona(Persona, OtraCaracteristica)))).
 
 %punto5
 contarPersonasCumplenPistas(Color, Cantidad) :-
