@@ -52,10 +52,8 @@ cumpleTodasPistas(Persona, Color) :-
 %punto5
 contarPersonasCumplenPistas(Color, CantidadPersonasCumplenPistas) :-
     findall(Persona, cumpleTodasPistas(Persona, Color), PersonasPorPista),
-    findall(Pista, pista(Color, Pista), Pistas),
-    length(Pistas, CantidadPistas),
-    length(PersonasPorPista, CantidadPersonasPorPista),
-    CantidadPersonasCumplenPistas is CantidadPersonasPorPista / CantidadPistas.
+    list_to_set(PersonasPorPista, SetPersonas),
+    length(SetPersonas, CantidadPersonasCumplenPistas).
 
 vaGanando(Color) :-
     contrincante(Color, Contrincante),
